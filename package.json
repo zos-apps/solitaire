@@ -20,7 +20,26 @@
         "height": 700
       },
       "resizable": true
-    }
+    },
+    "about": "Classic Klondike solitaire card game.",
+    "help": [
+      "Drag cards to move",
+      "Build up on foundations",
+      "Click deck to draw"
+    ],
+    "docs": "https://zos-apps.github.io/solitaire",
+    "site": "https://github.com/zos-apps/solitaire",
+    "shortcuts": [
+      "Cmd+Z Undo",
+      "N New game",
+      "H Hint"
+    ],
+    "features": [
+      "Standard Klondike rules",
+      "Undo",
+      "Auto-complete",
+      "Statistics"
+    ]
   },
   "scripts": {
     "build": "tsup",
@@ -53,5 +72,13 @@
     "solitaire",
     "macos",
     "desktop"
-  ]
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/zos-apps"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

@@ -1,54 +1,81 @@
-# 🃏 Solitaire
+# Solitaire
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/zos-apps/solitaire/releases)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-online-purple.svg)](https://zos-apps.github.io/solitaire)
+🃏 Classic Klondike solitaire card game.
 
-> Classic Klondike solitaire card game
+[![CI](https://github.com/zos-apps/solitaire/actions/workflows/ci.yml/badge.svg)](https://github.com/zos-apps/solitaire/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@zos-apps/solitaire.svg)](https://www.npmjs.com/package/@zos-apps/solitaire)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**[Documentation](https://zos-apps.github.io/solitaire)** • **[App Store](https://zos-apps.github.io/app-store)** • **[All Apps](https://github.com/zos-apps)**
+## About
 
-## Installation
-
-```bash
-npm install github:zos-apps/solitaire
-```
-
-Or install via the [zOS App Store](https://zos-apps.github.io/app-store).
-
-## Usage
-
-```tsx
-import Solitaire from '@zos-apps/solitaire';
-
-function App() {
-  return <Solitaire />;
-}
-```
+Classic Klondike solitaire card game.
 
 ## Features
 
-- Native zOS window integration
-- Dark mode support
+- Standard Klondike rules
+- Undo
+- Auto-complete
+- Statistics
 
-- Context menu actions
-- Menu bar integration
+## Installation
 
-## Category
+### From App Store
+Open the **App Store** in zOS and search for "Solitaire".
 
-**Games**
+### Via npm
+```bash
+npm install @zos-apps/solitaire
+```
 
-## Permissions
+## Usage
 
-- `storage.local`
+- Drag cards to move
+- Build up on foundations
+- Click deck to draw
 
-## Links
+## Keyboard Shortcuts
 
-- [Documentation](https://zos-apps.github.io/solitaire)
-- [GitHub Repository](https://github.com/zos-apps/solitaire)
-- [Report Issues](https://github.com/zos-apps/solitaire/issues)
-- [All zOS Apps](https://github.com/zos-apps)
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+Z` | Undo |
+| `N` | New game |
+| `H` | Hint |
+
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Documentation
+
+- [User Guide](https://zos-apps.github.io/solitaire)
+- [API Reference](https://zos-apps.github.io/solitaire/api)
+- [Changelog](https://github.com/zos-apps/solitaire/releases)
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](https://github.com/zos-apps/solitaire/blob/main/CONTRIBUTING.md) first.
 
 ## License
 
 MIT © [Hanzo AI](https://hanzo.ai)
+
+---
+
+<p align="center">
+  <a href="https://hanzo.ai">
+    <img src="https://hanzo.ai/logo.svg" alt="Hanzo AI" width="100">
+  </a>
+</p>
+<p align="center">
+  Built with ❤️ by <a href="https://hanzo.ai">Hanzo AI</a>
+</p>

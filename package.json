@@ -39,7 +39,27 @@
       "Undo",
       "Auto-complete",
       "Statistics"
-    ]
+    ],
+    "screenshots": {
+      "hero": "screenshots/hero.png",
+      "images": [
+        "screenshots/1-main.png",
+        "screenshots/2-feature.png"
+      ]
+    },
+    "downloads": {
+      "web": "https://zos-apps.github.io/solitaire"
+    },
+    "featured": false,
+    "tags": [
+      "games",
+      "fun",
+      "entertainment",
+      "solitaire"
+    ],
+    "releaseDate": "2024-12-28",
+    "support": "https://github.com/zos-apps/solitaire/issues",
+    "changelog": "https://github.com/zos-apps/solitaire/releases"
   },
   "scripts": {
     "build": "tsup",

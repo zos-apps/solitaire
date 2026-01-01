@@ -1,8 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-
-interface SolitaireProps {
-  onClose: () => void;
-}
+import { useState, useCallback, useEffect } from 'react';
+import type { AppProps } from '@zos-apps/config';
+import { useLocalStorage } from '@zos-apps/config';
 
 type Suit = 'hearts' | 'diamonds' | 'clubs' | 'spades';
 type Card = { suit: Suit; rank: number; faceUp: boolean };
@@ -32,7 +30,18 @@ const shuffle = <T,>(arr: T[]): T[] => {
   return result;
 };
 
-const Solitaire: React.FC<SolitaireProps> = ({ onClose }) => {
+interface SolitaireStats {
+  gamesPlayed: number;
+  gamesWon: number;
+  bestMoves: number | null;
+}
+
+const Solitaire: React.FC<AppProps> = ({ onClose: _onClose }) => {
+  const [stats, setStats] = useLocalStorage<SolitaireStats>('solitaire-stats', {
+    gamesPlayed: 0,
+    gamesWon: 0,
+    bestMoves: null,
+  });
   const [tableau, setTableau] = useState<Card[][]>([]);
   const [foundations, setFoundations] = useState<Card[][]>([[], [], [], []]);
   const [stock, setStock] = useState<Card[]>([]);
@@ -41,7 +50,7 @@ const Solitaire: React.FC<SolitaireProps> = ({ onClose }) => {
   const [moves, setMoves] = useState(0);
   const [gameWon, setGameWon] = useState(false);
 
-  const initGame = useCallback(() => {
+  const initGame = useCallback((countAsNewGame = true) => {
     const deck = shuffle(createDeck());
     const newTableau: Card[][] = [];
     let deckIndex = 0;
@@ -62,17 +71,26 @@ const Solitaire: React.FC<SolitaireProps> = ({ onClose }) => {
     setSelected(null);
     setMoves(0);
     setGameWon(false);
-  }, []);
+    if (countAsNewGame) {
+      setStats(prev => ({ ...prev, gamesPlayed: prev.gamesPlayed + 1 }));
+    }
+  }, [setStats]);
 
   useEffect(() => {
-    initGame();
-  }, [initGame]);
+    initGame(false); // Don't count initial load as a new game
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (foundations.every(f => f.length === 13)) {
       setGameWon(true);
+      setStats(prev => ({
+        ...prev,
+        gamesWon: prev.gamesWon + 1,
+        bestMoves: prev.bestMoves === null ? moves : Math.min(prev.bestMoves, moves),
+      }));
     }
-  }, [foundations]);
+  }, [foundations, moves, setStats]);
 
   const drawFromStock = () => {
     if (stock.length === 0) {
@@ -244,7 +262,7 @@ const Solitaire: React.FC<SolitaireProps> = ({ onClose }) => {
         <h1 className="text-4xl font-bold text-white mb-4">You Won!</h1>
         <p className="text-green-200 mb-6">Completed in {moves} moves</p>
         <button
-          onClick={initGame}
+          onClick={() => initGame()}
           className="px-6 py-3 bg-white text-green-800 font-bold rounded-lg hover:bg-green-100"
         >
           Play Again
@@ -263,8 +281,12 @@ const Solitaire: React.FC<SolitaireProps> = ({ onClose }) => {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-green-200">Moves: {moves}</span>
+          <span className="text-green-200/60 text-sm">
+            {stats.gamesWon}/{stats.gamesPlayed} wins
+            {stats.bestMoves !== null && ` • Best: ${stats.bestMoves}`}
+          </span>
           <button
-            onClick={initGame}
+            onClick={() => initGame()}
             className="px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded"
           >
             New Game
